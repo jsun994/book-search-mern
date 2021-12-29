@@ -1,7 +1,7 @@
 const express = require('express');
 const {ApolloServer} = require('apollo-server-express');
 const path = require('path');
-
+const mongoose = require("mongoose");
 const db = require('./config/connection');
 const {typeDefs, resolvers} = require('./schemas');
 const {authMiddleware} = require('./utils/auth');
@@ -19,6 +19,8 @@ const startServer = async () => {
   server.applyMiddleware({ app });
   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
 };
+
+mongoose.connection.dropDatabase();
 
 startServer()
 
